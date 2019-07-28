@@ -19,10 +19,11 @@ export function formatType(type: TypeIR): string {
     }
     if (type.union) {
       t = formatUnionType(type)
+      if (t.includes('Saiphe_')) {
+        console.log(t)
+      }
     }
-    if (t.includes('Saiphe_')) {
-      console.log(t)
-    }
+
     return t
   }
 
