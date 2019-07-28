@@ -2,10 +2,11 @@ import { TypeIR } from '../types'
 import { formatInterfaceType } from './Interface'
 import { formatScalarType } from './Scalar'
 import { formatUnionType } from './Union'
+import { _snake2Pascal } from './format'
 
 export function formatType(type: TypeIR): string {
   function lhs() {
-    return 'export type ' + typeName(type)
+    return 'type ' + typeName(type)
   }
 
   function rhs() {
@@ -33,5 +34,5 @@ export function formatType(type: TypeIR): string {
 }
 
 export function typeName(type: TypeIR): string {
-  return [...type.namespace, type.name].join('_')
+  return _snake2Pascal([...type.namespace, type.name].join('_'))
 }
