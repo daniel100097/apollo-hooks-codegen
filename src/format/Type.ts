@@ -13,12 +13,12 @@ export function formatType(type: TypeIR): string {
     let t = ''
     if (type.scalar) {
       t = formatScalarType(type)
-    }
-    if (type.fields) {
-      t = formatInterfaceType(type)
       if (t.includes('Saiphe_')) {
         console.log(t)
       }
+    }
+    if (type.fields) {
+      t = formatInterfaceType(type)
     }
     if (type.union) {
       t = formatUnionType(type)
