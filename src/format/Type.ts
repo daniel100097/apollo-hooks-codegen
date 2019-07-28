@@ -14,14 +14,14 @@ export function formatType(type: TypeIR): string {
       return formatScalarType(type)
     }
     if (type.fields) {
-      return _snake2Pascal(formatInterfaceType(type))
+      return formatInterfaceType(type)
     }
     if (type.union) {
       return formatUnionType(type)
     }
   }
 
-  let output = lhs() + ' = ' + rhs() + '\n'
+  let output = lhs() + ' = ' + _snake2Pascal(rhs()) + '\n'
 
   for (const field of type.fields || []) {
     output += formatType(field)
