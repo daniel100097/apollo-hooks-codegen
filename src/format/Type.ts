@@ -13,8 +13,8 @@ export function formatType(type: TypeIR): string {
     let t = ''
     if (type.scalar) {
       t = formatScalarType(type)
-      if (t.includes('Saiphe_')) {
-        console.log(t)
+      if (t.includes('_')) {
+        t = _snake2Pascal(t)
       }
     }
     if (type.fields) {

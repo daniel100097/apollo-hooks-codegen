@@ -51,7 +51,7 @@ export function formatOperation(operation: OperationIR): string {
       )},${_snake2Pascal(`${operationDataPrefix}_variables`)}>,
       MutationResult<${_snake2Pascal(`${operationDataPrefix}_data`)}>
      ]{
-       //@ts-ignore
+       // @ts-ignore
       return use${_snake2Pascal(
         operationType
       )}(${operationName}GqlDocument, options);
