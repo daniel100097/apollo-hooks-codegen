@@ -27,7 +27,6 @@
   "author": "pancomputationalist@mailbox.org",
   "license": "ISC",
   "peerDependencies": {
-    "graphql": "^14.4.2",
     "@graphql-codegen/cli": "^1.4.0",
     "react": "^16.8.23"
   },
