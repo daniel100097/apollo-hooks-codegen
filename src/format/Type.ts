@@ -14,7 +14,7 @@ export function formatType(type: TypeIR): string {
       return formatScalarType(type)
     }
     if (type.fields) {
-      return formatInterfaceType(type)
+      return _snake2Pascal(formatInterfaceType(type))
     }
     if (type.union) {
       return formatUnionType(type)
