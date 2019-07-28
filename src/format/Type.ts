@@ -16,12 +16,12 @@ export function formatType(type: TypeIR): string {
     }
     if (type.fields) {
       t = formatInterfaceType(type)
-    }
-    if (type.union) {
-      t = formatUnionType(type)
       if (t.includes('Saiphe_')) {
         console.log(t)
       }
+    }
+    if (type.union) {
+      t = formatUnionType(type)
     }
 
     return t
