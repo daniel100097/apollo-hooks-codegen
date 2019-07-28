@@ -1,10 +1,10 @@
-import { DocumentFile } from 'graphql-codegen-core'
+import { Types } from '@graphql-codegen/plugin-helpers'
 import { FileIR } from '../types'
 import { transformOperationDefinitionNode } from './Operation'
 import { transformFragmentDefinitionNode } from './Fragment'
 import { OperationDefinitionNode, FragmentDefinitionNode } from 'graphql'
 
-export function transformDocumentFile(file: DocumentFile): FileIR {
+export function transformDocumentFile(file: Types.DocumentFile): FileIR {
   return {
     filePath: file.filePath,
     operations: file.content.definitions

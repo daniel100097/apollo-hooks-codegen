@@ -1,12 +1,12 @@
-import { DocumentFile, GraphQLSchema } from 'graphql-codegen-core'
 import { PluginConfig } from './types'
 import { transform } from './transform'
 import { format } from './format'
+import { GraphQLSchema } from 'graphql'
+import { Types } from '@graphql-codegen/plugin-helpers'
 
-// main function called by graphql-code-generator. Must return the generated code as a string.
 export function plugin(
   schema: GraphQLSchema,
-  documents: DocumentFile[],
+  documents: Types.DocumentFile[],
   config: PluginConfig
 ): string {
   try {

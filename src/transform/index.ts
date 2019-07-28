@@ -1,12 +1,12 @@
 import { GraphQLSchema } from 'graphql'
-import { DocumentFile } from 'graphql-codegen-core'
+import { Types } from '@graphql-codegen/plugin-helpers'
 import { PluginConfig, PluginIR } from '../types'
 import { setGlobals, InputTypes } from './Globals'
 import { transformDocumentFile } from './DocumentFile'
 
 export function transform(
   schema: GraphQLSchema,
-  documents: DocumentFile[],
+  documents: Types.DocumentFile[],
   config: PluginConfig
 ): PluginIR {
   setGlobals(schema, config)

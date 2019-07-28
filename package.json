@@ -27,9 +27,9 @@
   "author": "pancomputationalist@mailbox.org",
   "license": "ISC",
   "peerDependencies": {
-    "graphql": "^14.0.2",
-    "graphql-code-generator": "^0.15.1",
-    "react": "^16.7.0-alpha.2"
+    "graphql": "^14.4.2",
+    "@graphql-codegen/cli": "^1.4.0",
+    "react": "^16.8.23"
   },
   "devDependencies": {
     "@types/fs-extra": "^8.0.0",
@@ -43,14 +43,15 @@
     "apollo-link-http": "^1.5.15",
     "fs-extra": "^8.1.0",
     "graphql": "^14.4.2",
-    "graphql-code-generator": "^0.18.2",
+    "@graphql-codegen/cli": "^1.4.0",
     "jest": "^24.8.0",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
     "react-dom": "16.8.6",
-    "react-testing-library": "^8.0.1",
+    "@testing-library/react": "^8.0.7",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.3",
     "unfetch": "^4.1.0"
-  }
+  },
+  "dependencies": {}
 }
