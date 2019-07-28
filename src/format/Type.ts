@@ -34,5 +34,7 @@ export function formatType(type: TypeIR): string {
 }
 
 export function typeName(type: TypeIR): string {
-  return _snake2Pascal([...type.namespace, type.name].join('_'))
+  const tmp = _snake2Pascal([...type.namespace, type.name].join('_'))
+  console.log(tmp)
+  return tmp
 }
