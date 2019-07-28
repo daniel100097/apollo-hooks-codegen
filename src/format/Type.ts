@@ -10,18 +10,23 @@ export function formatType(type: TypeIR): string {
   }
 
   function rhs() {
+    let t = ''
     if (type.scalar) {
-      return formatScalarType(type)
+      t = formatScalarType(type)
     }
     if (type.fields) {
-      return formatInterfaceType(type)
+      t = formatInterfaceType(type)
     }
     if (type.union) {
-      return formatUnionType(type)
+      t = formatUnionType(type)
     }
+    if (t.includes('Saiphe_')) {
+      console.log(t)
+    }
+    return t
   }
 
-  let output = lhs() + ' = ' + _snake2Pascal(rhs()) + '\n'
+  let output = lhs() + ' = ' + rhs() + '\n'
 
   for (const field of type.fields || []) {
     output += formatType(field)
