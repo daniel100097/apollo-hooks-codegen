@@ -23,7 +23,7 @@ export function formatOperation(operation: OperationIR): string {
 
   if (operationType === 'query') {
     return `
-    export const ${operationName}GqlDocument = ${gql}
+    const ${operationName}GqlDocument = ${gql}
     
     export function use${operationName}(options?: QueryHookOptions<${_snake2Pascal(
       `${operationDataPrefix}_variables`
@@ -32,6 +32,7 @@ export function formatOperation(operation: OperationIR): string {
       `${operationDataPrefix}_data`
     )}>(${operationName}GqlDocument, options);
     }
+    use${operationName}.Document = ${operationName}GqlDocument;
       
     ${formatType(variables)}
     ${formatType(data)}
@@ -40,7 +41,7 @@ export function formatOperation(operation: OperationIR): string {
 
   if (operationType === 'mutation') {
     return `
-    export const ${operationName}GqlDocument = ${gql}
+    const ${operationName}GqlDocument = ${gql}
     
     export function use${operationName}(options?: MutationHookOptions<
       ${_snake2Pascal(`${operationDataPrefix}_data`)},
@@ -56,6 +57,8 @@ export function formatOperation(operation: OperationIR): string {
         operationType
       )}(${operationName}GqlDocument, options);
     }
+    use${operationName}.Document = ${operationName}GqlDocument;
+
       
     ${formatType(variables)}
     ${formatType(data)}
@@ -63,7 +66,7 @@ export function formatOperation(operation: OperationIR): string {
   }
 
   return `
-export const ${operationName}GqlDocument = ${gql}
+const ${operationName}GqlDocument = ${gql}
 
 export function use${operationName}(options?: ${_snake2Pascal(
     operationType
@@ -76,6 +79,8 @@ export function use${operationName}(options?: ${_snake2Pascal(
     operationType
   )}(${operationName}GqlDocument, options);
 }
+use${operationName}.Document = ${operationName}GqlDocument;
+
   
 ${formatType(variables)}
 ${formatType(data)}
