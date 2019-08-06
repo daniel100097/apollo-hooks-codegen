@@ -6,16 +6,48 @@ export const disclaimer = `
 `
 
 export const imports = `
-import { useMutation, useQuery, MutationHookOptions, QueryHookOptions, MutationResult, BaseMutationHookOptions, SubscriptionHookOptions, useSubscription } from 'react-apollo-hooks';
+import {
+    ApolloConsumer,
+    CommonOptions,
+    getApolloContext,
+    LazyQueryHookOptions,
+    MutationHookOptions,
+    MutationOptions,
+    MutationTuple,
+    QueryCurrentObservable,
+    QueryHookOptions,
+    QueryLazyOptions,
+    QueryOptions,
+    QueryPreviousData,
+    QueryTuple,
+    RenderPromises,
+    resetApolloContext,
+    SubscriptionCurrentObservable,
+    SubscriptionHookOptions,
+    SubscriptionOptions,
+    useApolloClient,
+    useLazyQuery,
+    useMutation,
+    useQuery,
+    useSubscription,
+} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-
-export declare type MutationHookFn<TData, TVariables> = (options?: BaseMutationHookOptions<TData, TVariables>) => Promise<{data: TData}>;
+import { DocumentNode, GraphQLError } from 'graphql';
+import { MutationResult, MutationFunctionOptions } from '@apollo/react-common'
 `
 
 export const boilerplate = `
 /*
  * Boilerplate
  */
+
+type MutationHookFn<TData, TVariables> = [(options?: MutationFunctionOptions<TData, TVariables>) => Promise<ExecutionResult<TData>>, MutationResult<TData>];
+
+export interface ExecutionResult<T = Record<string, any>> {
+    data: T;
+    extensions?: Record<string, any>;
+    errors?: GraphQLError[];
+}
 
 type Nullable<T> = T | null
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>

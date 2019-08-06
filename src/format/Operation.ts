@@ -21,18 +21,23 @@ export function formatOperation(operation: OperationIR): string {
   const operationName = _snake2Pascal(`${operationType}_${name}`)
   const operationDataPrefix = _snake2Pascal(`${name}`)
 
+  const hookDataInterface = `${_snake2Pascal(
+    `${operationDataPrefix}_data`
+  )},${_snake2Pascal(`${operationDataPrefix}_variables`)}`
+
+  const hookName = `use${operationName}`
+
   if (operationType === 'query') {
     return `
-    const ${operationName}GqlDocument = ${gql}
+    ${hookName}.Document = ${gql} as DocumentNode;
     
-    export function use${operationName}(options?: QueryHookOptions<${_snake2Pascal(
-      `${operationDataPrefix}_variables`
-    )}>){
-      return use${_snake2Pascal(operationType)}<${_snake2Pascal(
-      `${operationDataPrefix}_data`
-    )}>(${operationName}GqlDocument, options);
+    export function ${hookName}(options?: QueryHookOptions<${hookDataInterface}>){
+      return useQuery<${hookDataInterface}>(${hookName}.Document, options);
     }
-    use${operationName}.Document = ${operationName}GqlDocument;
+
+    ${hookName}.lazy = function (options?: LazyQueryHookOptions<${hookDataInterface}>){
+      return useLazyQuery(${hookName}.Document, options);
+    }
       
     ${formatType(variables)}
     ${formatType(data)}
@@ -41,48 +46,29 @@ export function formatOperation(operation: OperationIR): string {
 
   if (operationType === 'mutation') {
     return `
-    const ${operationName}GqlDocument = ${gql}
+    ${hookName}.Document = ${gql} as DocumentNode;
     
-    export function use${operationName}(options?: MutationHookOptions<
-      ${_snake2Pascal(`${operationDataPrefix}_data`)},
-      ${_snake2Pascal(`${operationDataPrefix}_variables`)}
-    >): [
-      MutationHookFn<${_snake2Pascal(
-        `${operationDataPrefix}_data`
-      )},${_snake2Pascal(`${operationDataPrefix}_variables`)}>,
-      MutationResult<${_snake2Pascal(`${operationDataPrefix}_data`)}>
-     ]{
-       // @ts-ignore
-      return use${_snake2Pascal(
-        operationType
-      )}(${operationName}GqlDocument, options);
+    export function use${operationName}(options?: MutationHookOptions<${hookDataInterface}>): MutationHookFn<${hookDataInterface}>{
+      return useMutation<${hookDataInterface}>(${hookName}.Document, options) as any;
     }
-    use${operationName}.Document = ${operationName}GqlDocument;
-
       
     ${formatType(variables)}
     ${formatType(data)}
     `
   }
 
-  return `
-const ${operationName}GqlDocument = ${gql}
+  if (operationType === 'subscription') {
+    return `
+    ${hookName}.Document = ${gql} as DocumentNode;
+    
+    export function use${operationName}(options?: SubscriptionHookOptions<${hookDataInterface}>){
+      return useSubscription<${hookDataInterface}>(${hookName}.Document, options);
+    }
+      
+    ${formatType(variables)}
+    ${formatType(data)}
+    `
+  }
 
-export function use${operationName}(options?: ${_snake2Pascal(
-    operationType
-  )}HookOptions<
-  ${_snake2Pascal(`${operationDataPrefix}_data`)},
-  ${_snake2Pascal(`${operationDataPrefix}_variables`)}
->
-){
-  return use${_snake2Pascal(
-    operationType
-  )}(${operationName}GqlDocument, options);
-}
-use${operationName}.Document = ${operationName}GqlDocument;
-
-  
-${formatType(variables)}
-${formatType(data)}
-`
+  throw new Error(`Unknown operation ${operationName}`)
 }

@@ -27,9 +27,11 @@
   "author": "pancomputationalist@mailbox.org",
   "license": "ISC",
   "peerDependencies": {
-    "graphql": "^14.4.2",
+    "graphql-tag": "^2.10.1",
     "@graphql-codegen/cli": "^1.4.0",
-    "react": "^16.8.23"
+    "graphql": "^14.4.2",
+    "react": "^16.8.23",
+    "@apollo/react-hooks": "^3.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^8.0.0",
