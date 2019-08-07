@@ -44,4 +44,4 @@ export interface FragmentIR {
 }
 
 export type OperationType = 'query' | 'mutation' | 'subscription'
-export type Modifier = 'Nullable' | 'ReadonlyArray'
+export type Modifier = 'Nullable' | 'ReadonlyArray' | 'Array'

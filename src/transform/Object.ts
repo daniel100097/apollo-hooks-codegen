@@ -105,7 +105,7 @@ function getTypeInfoFromField(
       }
 
       if (isListType(type)) {
-        addModifier('ReadonlyArray')
+        addModifier('Array')
         return unwrap(type.ofType, true)
       }
 
