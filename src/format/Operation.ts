@@ -32,7 +32,11 @@ export function formatOperation(operation: OperationIR): string {
     ${hookName}.Document = ${gql} as DocumentNode;
     
     export function ${hookName}(options?: QueryHookOptions<${hookDataInterface}>){
-      return useQuery<${hookDataInterface}>(${hookName}.Document, options);
+      const result = useQuery<${hookDataInterface}>(${hookName}.Document, options);
+      if (!Object.keys(result.data).length){
+        delete result.data;
+      }
+      return result;
     }
 
     ${hookName}.lazy = function (options?: LazyQueryHookOptions<${hookDataInterface}>){
