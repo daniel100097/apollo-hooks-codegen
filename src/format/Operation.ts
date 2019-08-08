@@ -33,7 +33,7 @@ export function formatOperation(operation: OperationIR): string {
     
     export function ${hookName}(options?: QueryHookOptions<${hookDataInterface}>){
       const result = useQuery<${hookDataInterface}>(${hookName}.Document, options);
-      if (!Object.keys(result.data).length){
+      if (result.data && !Object.keys(result.data).length){
         delete result.data;
       }
       return result;
