@@ -5,8 +5,11 @@ import { formatUnionType } from './Union'
 import { _snake2Pascal } from './format'
 
 export function formatType(type: TypeIR): string {
-  function lhs() {
-    return 'type ' + typeName(type)
+  function lhs(includeExport = false) {
+    if (includeExport) {
+      return `export type ${typeName(type)}`
+    }
+    return `type ${typeName(type)}`
   }
 
   function rhs() {
@@ -27,7 +30,7 @@ export function formatType(type: TypeIR): string {
     return t
   }
 
-  let output = lhs() + ' = ' + rhs() + '\n'
+  let output = lhs(type.fields && type.name === 'data') + ' = ' + rhs() + '\n'
 
   for (const field of type.fields || []) {
     output += formatType(field)
