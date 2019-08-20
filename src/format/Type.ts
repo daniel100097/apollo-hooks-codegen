@@ -30,7 +30,11 @@ export function formatType(type: TypeIR): string {
     return t
   }
 
-  let output = lhs(type.fields && type.name === 'data') + ' = ' + rhs() + '\n'
+  let output =
+    lhs(type.fields && (type.name === 'data' || type.name === 'variables')) +
+    ' = ' +
+    rhs() +
+    '\n'
 
   for (const field of type.fields || []) {
     output += formatType(field)
