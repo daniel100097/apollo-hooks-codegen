@@ -53,7 +53,7 @@ type Nullable<T> = T | null;
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 const queryDefaultOptions = {
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'cache-and-network' as 'cache-and-network',
 };
 const lazyQueryDefaultOptions = {};
 const mutationDefaultOptions = {};
