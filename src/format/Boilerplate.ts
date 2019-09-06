@@ -49,7 +49,14 @@ export interface ExecutionResult<T = Record<string, any>> {
     errors?: GraphQLError[];
 }
 
-type Nullable<T> = T | null
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
+type Nullable<T> = T | null;
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
+const queryDefaultOptions = {
+    fetchPolicy: 'cache-and-network',
+};
+const lazyQueryDefaultOptions = {};
+const mutationDefaultOptions = {};
+const subscriptionDefaultOptions = {};
 
 `

@@ -32,7 +32,7 @@ export function formatOperation(operation: OperationIR): string {
     ${hookName}.Document = ${gql} as DocumentNode;
     
     export function ${hookName}(options?: QueryHookOptions<${hookDataInterface}>){
-      const result = useQuery<${hookDataInterface}>(${hookName}.Document, options);
+      const result = useQuery<${hookDataInterface}>(${hookName}.Document, {...queryDefaultOptions, ...options});
       if (result.data && !Object.keys(result.data).length){
         delete result.data;
       }
@@ -40,7 +40,7 @@ export function formatOperation(operation: OperationIR): string {
     }
 
     ${hookName}.lazy = function (options?: LazyQueryHookOptions<${hookDataInterface}>){
-      return useLazyQuery(${hookName}.Document, options);
+      return useLazyQuery(${hookName}.Document, {...lazyQueryDefaultOptions, ...options});
     }
       
     ${formatType(variables)}
@@ -53,7 +53,7 @@ export function formatOperation(operation: OperationIR): string {
     ${hookName}.Document = ${gql} as DocumentNode;
     
     export function use${operationName}(options?: MutationHookOptions<${hookDataInterface}>): MutationHookFn<${hookDataInterface}>{
-      return useMutation<${hookDataInterface}>(${hookName}.Document, options) as any;
+      return useMutation<${hookDataInterface}>(${hookName}.Document, {...mutationDefaultOptions, ...options}) as any;
     }
       
     ${formatType(variables)}
@@ -66,7 +66,7 @@ export function formatOperation(operation: OperationIR): string {
     ${hookName}.Document = ${gql} as DocumentNode;
     
     export function use${operationName}(options?: SubscriptionHookOptions<${hookDataInterface}>){
-      return useSubscription<${hookDataInterface}>(${hookName}.Document, options);
+      return useSubscription<${hookDataInterface}>(${hookName}.Document, {...subscriptionDefaultOptions, ...options});
     }
       
     ${formatType(variables)}
