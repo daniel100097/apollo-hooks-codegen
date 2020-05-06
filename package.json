@@ -18,11 +18,11 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "try": "npm run build && npm run generate",
-    "build": "tsc",
+    "build": "npx tsc",
     "prepare": "npm run build",
-    "generate": "gql-gen",
-    "test": "jest",
-    "graphql-demo:generate": "gql-gen -c codegen.test.yml"
+    "generate": "npx gql-gen",
+    "test": "npx jest",
+    "graphql-demo:generate": "npx gql-gen -c codegen.test.yml"
   },
   "author": "pancomputationalist@mailbox.org",
   "license": "ISC",
