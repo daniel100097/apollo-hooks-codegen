@@ -48,6 +48,7 @@
     "fs-extra": "^8.1.0",
     "graphql": "^14.4.2",
     "jest": "^24.8.0",
+    "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-apollo": "^2.5.8",
     "react-dom": "16.13.1",
