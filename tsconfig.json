@@ -11,7 +11,7 @@
     "lib": ["esnext", "dom"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-
+    "skipLibCheck": true,
     "strict": true
   },
   "include": ["./src/**/*", "./tests/**/*", "dist/index.js", "index.js"],
